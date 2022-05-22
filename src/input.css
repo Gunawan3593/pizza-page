@@ -21,3 +21,7 @@ body {
 .hamburger-active > span:nth-child(3) {
   @apply -rotate-45;
 }
+
+.page-slider-active {
+  @apply border-4 px-2 border-black bg-white;
+}

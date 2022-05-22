@@ -2,18 +2,25 @@ const slider = document.querySelector('#slider');
 const timer = ms => new Promise(res => setTimeout(res, ms));
 
 let slideIndex = 1;
-slide(slideIndex);
+let lastIndex = 0;
 
 const sliderLoad = document.querySelector('#slider-load');
 const perSec = document.body.clientWidth / 1000;
 let loadingSlider = 0;
 let pause = false;
+const pageSlider = document.querySelector('#page-slider');
+const prevSlider = document.querySelector('#prev-slider');
+const nextSlider = document.querySelector('#next-slider');
+const prevImage = document.querySelector('#prev-image');
+const nextImage = document.querySelector('#next-image');
+
+slide(slideIndex);
+
 movedLoad();
 
 async function movedLoad() {
   while(true) {
     if(loadingSlider > document.body.clientWidth) {
-      loadingSlider=0;
       if(slideIndex == 4) slideIndex = 0;
       slideIndex++;
       slide(slideIndex);
@@ -26,16 +33,23 @@ async function movedLoad() {
   }
 }
 
-
-async function slide(index) {
+async function slide(index, currentIndex) {
+  loadingSlider = 0;
   const slide1 = document.querySelector(`#slide-${index}`);
-  let lastIndex = 0
-  if(index === 1) {
-    lastIndex = 4;
+  const pageSlider1 = pageSlider.querySelector(`div:nth-child(${index})`);
+  pageSlider1.classList.add('page-slider-active');
+  if(currentIndex) {
+    lastIndex = currentIndex;
   } else {
-    lastIndex = index - 1;
+    if(index === 1) {
+      lastIndex = 4;
+    } else {
+      lastIndex = index - 1;
+    }
   }
   const slide2 = document.querySelector(`#slide-${lastIndex}`);
+  const pageSlider2 = pageSlider.querySelector(`div:nth-child(${lastIndex})`);
+  pageSlider2.classList.remove('page-slider-active');
   const caption1h = document.querySelector(`#caption${index}-h`);
   const caption1p = document.querySelector(`#caption${index}-p`);
   const caption1a = document.querySelector(`#caption${index}-a`);
@@ -67,6 +81,24 @@ async function slide(index) {
   caption1p.setAttribute('style', 'animation-delay: 600ms;');
   caption1a.setAttribute('style', 'animation-delay: 700ms;');
 
+  let prevIndex;
+  if(index === 1) {
+    prevIndex = 4;
+  } else {
+    prevIndex = index - 1;
+  }
+  const sliderImage1 = document.querySelector(`#slide-${prevIndex}`);
+  prevImage.src = sliderImage1.src;
+
+  let nextIndex;
+  if(index === 4) {
+    nextIndex = 1;
+  } else {
+    nextIndex = index + 1;
+  }
+  const sliderImage2 = document.querySelector(`#slide-${nextIndex}`);
+  nextImage.src = sliderImage2.src;
+
   await timer(1000);
   slide2.classList.add('hidden');
   slide2.classList.remove('animate-fade-out-up');
@@ -76,12 +108,79 @@ async function slide(index) {
   slide1.classList.remove('animate-fade-in-up');
 }
 
+
+let lastSlide;
+for(let i=1; i<=4; i++) {
+  pageSlider.querySelector(`div:nth-child(${i})`).addEventListener('click', function(){
+    if (slideIndex === i) return;
+    lastSlide = slideIndex;
+    slideIndex = i;
+    pause = false;
+    slide(slideIndex, lastSlide);
+  });
+}
+
 slider.addEventListener('mouseover', function() {
+  pageSlider.classList.remove('hidden');
+  pageSlider.classList.add('flex');
+  prevSlider.classList.remove('hidden');
+  prevSlider.classList.add('flex');
+  nextSlider.classList.remove('hidden');
+  nextSlider.classList.add('flex');
   pause = true;
 });
 
 slider.addEventListener('mouseout', function() {
+  pageSlider.classList.add('hidden');
+  pageSlider.classList.remove('flex');
+  prevSlider.classList.add('hidden');
+  prevSlider.classList.remove('flex');
+  nextSlider.classList.add('hidden');
+  nextSlider.classList.remove('flex');
   pause = false;
+});
+
+
+prevSlider.addEventListener('mouseover', function() {
+  prevImage.classList.remove('hidden');
+});
+
+prevSlider.addEventListener('click', function() {
+  let prevIndex;
+  if(slideIndex === 1) {
+    prevIndex = 4;
+  }else{
+    prevIndex = slideIndex - 1;
+  }
+  lastSlide = slideIndex;
+  pause = false;
+  slide(prevIndex, lastSlide);
+  slideIndex = prevIndex;
+});
+
+nextSlider.addEventListener('mouseover', function() {
+  nextImage.classList.remove('hidden');
+});
+
+nextSlider.addEventListener('click', function() {
+  let nextIndex;
+  if(slideIndex === 4) {
+    nextIndex = 1;
+  }else{
+    nextIndex = slideIndex + 1;
+  }
+  lastSlide = slideIndex;
+  pause = false;
+  slide(nextIndex, lastSlide);
+  slideIndex = nextIndex;
+});
+
+prevSlider.addEventListener('mouseout', function() {
+  prevImage.classList.add('hidden');
+});
+
+nextSlider.addEventListener('mouseout', function() {
+  nextImage.classList.add('hidden');
 });
 
 // Hamburger
@@ -103,7 +202,6 @@ hamburger.addEventListener('click', function() {
 
 // click out humberger
 window.addEventListener('click', function(e) {
-  console.log(e.target);
   if(e.target !== hamburger && e.target !== navMenu && e.target !== hamburgerLineTop && e.target !== hamburgerLineMid && e.target !== hamburgerLineBottom ) {
     hamburger.classList.remove('hamburger-active');
     navMenu.classList.add('hidden');
