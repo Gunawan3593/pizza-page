@@ -10,11 +10,18 @@
 </head>
 <body>
   <section id="header" class="relative z-10 bg-white">
-    <div class="container">
-      <div class="flex justify-between items-center py-5">
-        <h1 class="text-4xl uppercase font-bold text-primary">Gatherer</h1>
-        <nav>
-          <ul class="flex gap-5 uppercase text-dark text-sm font-medium">
+    <div class="px-5 lg:container">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center py-5">
+        <div class="flex justify-between">
+          <h1 class="text-4xl uppercase font-bold text-primary">Gatherer</h1>
+          <button id="hamburger" name="hamburger" type="button" class="lg:hidden">
+            <span id="hamburger-line-top" class="hamburger-line transition duration-300 ease-in-out origin-top-left"></span>
+            <span id="hamburger-line-mid" class="hamburger-line transition duration-300 ease-in-out"></span>
+            <span id="hamburger-line-bottom" class="hamburger-line transition duration-300 ease-in-out origin-bottom-left"></span>
+          </button>
+        </div>
+        <nav id="nav-menu" class="lg:flex mt-5 lg:mt-0 lg:translate-y-0">
+          <ul class="flex flex-col lg:flex-row gap-5 uppercase text-dark text-sm font-medium">
             <li>Home</li>
             <li>About</li>
             <li>Service</li>
@@ -32,12 +39,14 @@
   <section id="slider" class="relative">
     <div id="slider-load" class="absolute h-[0.4rem] bg-slate-400 opacity-60 z-20 w-full -left-full"></div>
     <div class="relative bg-red-500 h-[500px] overflow-hidden">
-      <img id="slide-2" class="absolute" src="assets/images/slide2.jpg" alt="Slide 2" />
-      <img id="slide-1" class="absolute" src="assets/images/slide1.jpg" alt="Slide 1" />
-      <div class="absolute h-full w-full bg-black opacity-70"></div>
+      <img id="slide-4" class="absolute h-full w-full bg-cover object-cover object-center hidden" src="assets/images/slide4.jpg" alt="Slide 4" />
+      <img id="slide-3" class="absolute h-full w-full bg-cover object-cover object-center hidden" src="assets/images/slide3.jpg" alt="Slide 3" />
+      <img id="slide-2" class="absolute h-full w-full bg-cover object-cover object-center hidden" src="assets/images/slide2.jpg" alt="Slide 2" />
+      <img id="slide-1" class="absolute h-full w-full bg-cover object-cover object-center hidden" src="assets/images/slide1.jpg" alt="Slide 1" />
+      <div class="absolute h-full w-full bg-black opacity-60"></div>
       <div class="absolute h-full flex justify-center items-center">
-        <div class="max-w-lg ml-40 text-white">
-          <h1 id="caption1-h" class="text-5xl font-bold -translate-y-[500px]" style="animation-delay: 500ms;">FRESH & FAST FOOD
+        <div class="max-w-lg pl-5 lg:ml-40 text-white overflow-hidden">
+          <h1 id="caption1-h" class="text-5xl font-bold -translate-y-[500px] uppercase">FRESH & FAST FOOD
             STREET FOOD</h1>
           <p id="caption1-p" class="mt-5 text-sm translate-y-[500px]" style="animation-delay: 600ms;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam totam rerum aliquid assumenda, corporis pariatur culpa ullam similique veritatis doloribus.</p>
           <div id="caption1-a" class="flex mt-5 translate-y-[500px]" style="animation-delay: 700ms;">
@@ -47,11 +56,31 @@
         </div>
       </div>
       <div class="absolute h-full flex justify-center items-center">
-        <div class="max-w-lg ml-40 text-white top-0">
-          <h1 id="caption2-h" class="text-5xl font-bold -translate-y-[500px]" style="animation-delay: 500ms;">BEST QUALITY
+        <div class="max-w-lg pl-5 lg:ml-40 text-white top-0 overflow-hidden">
+          <h1 id="caption2-h" class="text-5xl font-bold -translate-y-[500px] uppercase">BEST QUALITY
             PRODUCT TASTE FOOD</h1>
           <p id="caption2-p" class="mt-5 text-sm translate-y-[500px]" style="animation-delay: 600ms;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia sint expedita ipsam facilis maxime quos.</p>
           <div id="caption2-a" class="flex mt-5 translate-y-[500px]" style="animation-delay: 700ms;">
+            <a href="#" class="mr-10 text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Order Now</a>
+            <a href="#" class="text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Our Menu</a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute h-full flex justify-center items-center">
+        <div class="max-w-lg pl-5 lg:ml-40 text-white top-0 overflow-hidden">
+          <h1 id="caption3-h" class="text-5xl font-bold -translate-y-[500px] uppercase">Lorem ipsum dolor sit amet.</h1>
+          <p id="caption3-p" class="mt-5 text-sm translate-y-[500px]" style="animation-delay: 600ms;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nobis ratione debitis, non consequuntur nulla?</p>
+          <div id="caption3-a" class="flex mt-5 translate-y-[500px]" style="animation-delay: 700ms;">
+            <a href="#" class="mr-10 text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Order Now</a>
+            <a href="#" class="text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Our Menu</a>
+          </div>
+        </div>
+      </div>
+      <div class="absolute h-full flex justify-center items-center">
+        <div class="max-w-lg pl-5 lg:ml-40 text-white top-0 overflow-hidden">
+          <h1 id="caption4-h" class="text-5xl font-bold -translate-y-[500px] uppercase">Lorem ipsum dolor sit, amet consectetur adipisicing.</h1>
+          <p id="caption4-p" class="mt-5 text-sm translate-y-[500px]" style="animation-delay: 600ms;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum saepe aperiam facere itaque nam tenetur.</p>
+          <div id="caption4-a" class="flex mt-5 translate-y-[500px]" style="animation-delay: 700ms;">
             <a href="#" class="mr-10 text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Order Now</a>
             <a href="#" class="text-md px-5 py-3 bg-primary rounded-lg uppercase font-semibold">Our Menu</a>
           </div>

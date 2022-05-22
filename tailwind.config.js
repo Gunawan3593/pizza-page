@@ -10,50 +10,54 @@ module.exports = {
       keyframes: {
         'fade-out-down': {
           '0%': {
-            opacity: 1,
             transform: 'translateY(0)'
           },
+          '50%': {
+            'animation-timing-function': 'linear'
+          },
           '100%': {
-            transform: 'translateY(500px)',
-            opacity: 0,
+            transform: 'translateY(500px)'
           }
         },
         'fade-in-down': {
           '0%': {
-            transform: 'translateY(-500px)',
-            opacity: 0
+            transform: 'translateY(-500px)'
+          },
+          '50%': {
+            'animation-timing-function': 'linear'
           },
           '100%': {
-            transform: 'translateY(0)',
-            opacity: 1
+            transform: 'translateY(0)'
           }
         },
         'fade-out-up': {
           '0%': {
-            transform: 'translateY(0)',
-            opacity: 1
+            transform: 'translateY(0)'
+          },
+          '50%': {
+            'animation-timing-function': 'linear'
           },
           '100%': {
-            transform: 'translateY(-500px)',
-            opacity: 0
+            transform: 'translateY(-500px)'
           }
         },
         'fade-in-up': {
           '0%': {
-            transform: 'translateY(500px)',
-            opacity: 0
+            transform: 'translateY(500px)'
+          },
+          '50%': {
+            'animation-timing-function': 'linear'
           },
           '100%': {
-            transform: 'translateY(0)',
-            opacity: 1
+            transform: 'translateY(0)'
           }
         }
       },
       animation: {
-        'fade-in-down': 'fade-in-down 0.8s ease-in-out forwards',
-        'fade-out-down': 'fade-out-down 0.8s ease-in-out forwards',
-        'fade-in-up': 'fade-in-up 0.8s ease-in-out forwards',
-        'fade-out-up': 'fade-out-up 0.8s ease-in-out forwards',
+        'fade-in-down': 'fade-in-down .9s ease-out forwards',
+        'fade-out-down': 'fade-out-down .9s ease-out forwards',
+        'fade-in-up': 'fade-in-up .9s ease-out forwards',
+        'fade-out-up': 'fade-out-up .9s ease-out forwards',
       }
     },
     container: {
