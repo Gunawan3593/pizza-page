@@ -207,3 +207,32 @@ window.addEventListener('click', function(e) {
     navMenu.classList.add('hidden');
   }
 });
+
+
+// Menu
+let startMenu = 1;
+let selectedMenu = 0;
+const menuLink = document.querySelector('#menu-link');
+
+showMenu(startMenu);
+
+for(let i = 1; i <= 4; i++) {
+  const linkEL = menuLink.querySelector(`li:nth-child(${i})`);
+  linkEL.addEventListener('click', function() {
+    showMenu(i);
+  });
+}
+
+function showMenu(index) {
+  const linkSelected = menuLink.querySelector(`li:nth-child(${index})`);
+  const tabMenu = document.querySelector(`#tab-menu > div:nth-child(${index})`);
+  if(selectedMenu > 0) {
+    const linkEL2 = menuLink.querySelector(`li:nth-child(${selectedMenu})`);
+    const tabMenu2 = document.querySelector(`#tab-menu > div:nth-child(${selectedMenu})`);
+    linkEL2.classList.remove('text-primary');
+    tabMenu2.classList.add('hidden');
+  }
+  selectedMenu = index;
+  linkSelected.classList.add('text-primary');
+  tabMenu.classList.remove('hidden');
+}

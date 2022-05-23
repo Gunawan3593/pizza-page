@@ -61,7 +61,7 @@ module.exports = {
       }
     },
     container: {
-      padding: '6rem',
+      padding: '0.8rem',
       center: true
     }
   },

@@ -25,3 +25,12 @@ body {
 .page-slider-active {
   @apply border-4 px-2 border-black bg-white;
 }
+
+.arrow-down-shape {
+  @apply h-4 w-20 border-[3px] border-primary border-t-0 border-x-0 relative
+}
+
+.arrow-down-shape::after {
+  content: "";
+  @apply absolute border-[3px] h-2 w-2 bg-slate-100 border-primary rotate-45 border-t-0 border-l-0 mt-[0.7rem] left-[50%] -translate-x-[50%]
+}
