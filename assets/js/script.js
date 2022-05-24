@@ -297,17 +297,62 @@ async function showGallery(foods) {
   }
 }
 
-// sliderGallery();
 
-async function sliderGallery() {
-  const gallerySlider = document.querySelector('#gallery-slider');
-  gallerySlider.classList.add('scale-100');
-  await timer(100);
-  gallerySlider.classList.remove('-rotate-12');
-  await timer(100);
-  gallerySlider.classList.add('rotate-12');
-  await timer(100);
-  gallerySlider.classList.remove('rotate-12');
-  await timer(100);
-  gallerySlider.classList.add('rotate-0');
+let galleryIndex = 0;
+
+for(let i = 1; i <= totalGallery; i++) {
+  const zoomEl = document.querySelector(`#gallery-food > div:nth-child(${i}) > div:nth-child(2)`);
+  zoomEl.addEventListener('click', function() {
+    sliderGallery(i);
+  });
 }
+
+const gallerySlider = document.querySelector('#gallery-slider');
+async function sliderGallery(index) {
+  if(galleryIndex > 0) {
+    const galleryImage2 = document.querySelector(`#gallery-image > img:nth-child(${galleryIndex})`);
+    galleryImage2.classList.add('hidden');
+  }
+  const galleryContent = document.querySelector('#gallery-content');
+  const currentSlide = document.querySelector('#current-slide');
+  currentSlide.innerHTML = index;
+  gallerySlider.classList.remove('hidden');
+  galleryContent.classList.remove('scale-100');
+  await timer(200);
+  const galleryImage = document.querySelector(`#gallery-image > img:nth-child(${index})`);
+  galleryImage.classList.remove('hidden');
+  galleryContent.classList.add('scale-100');
+  await timer(450);
+  galleryContent.classList.add('animate-wiggle');
+  await timer(500);
+  galleryContent.classList.remove('animate-wiggle');
+  galleryIndex = index;
+}
+
+const closeSlider = document.querySelector('#close-slider');
+closeSlider.addEventListener('click', function() {
+  gallerySlider.classList.add('hidden');
+});
+
+const prevGallery = document.querySelector('#prev-gallery');
+prevGallery.addEventListener('click', function() {
+  let prevIndex = 0;
+  if(galleryIndex == 1) {
+    prevIndex = 6;
+  } else {
+    prevIndex = galleryIndex - 1;
+  }
+  sliderGallery(prevIndex);
+});
+
+const nextGallery = document.querySelector('#next-gallery');
+
+nextGallery.addEventListener('click', function() {
+  let nextIndex = 0;
+  if(galleryIndex == 6) {
+    nextIndex = 1;
+  } else {
+    nextIndex = galleryIndex + 1;
+  }
+  sliderGallery(nextIndex);
+});

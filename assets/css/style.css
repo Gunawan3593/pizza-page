@@ -819,14 +819,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   50% {
     transform: rotate(12deg);
-    -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
   }
 
   100% {
-    transform: rotate3d(0deg);
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    transform: rotate(0deg);
   }
 }
 
@@ -837,20 +833,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   50% {
     transform: rotate(12deg);
-    -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
   }
 
   100% {
-    transform: rotate3d(0deg);
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    transform: rotate(0deg);
   }
 }
 
 .animate-wiggle {
-  -webkit-animation: wiggle .9s ease forwards;
-          animation: wiggle .9s ease forwards;
+  -webkit-animation: wiggle .5s ease-in-out forwards;
+          animation: wiggle .5s ease-in-out forwards;
 }
 
 @-webkit-keyframes fade-in-up {
@@ -1363,12 +1355,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 500ms;
 }
 
-.duration-200 {
-  transition-duration: 200ms;
-}
-
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 body {
