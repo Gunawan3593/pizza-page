@@ -236,3 +236,78 @@ function showMenu(index) {
   linkSelected.classList.add('text-primary');
   tabMenu.classList.remove('hidden');
 }
+
+const galleryFood = document.querySelector('#gallery-food');
+let lastSelectGallery = 0;
+const totalGallery = galleryFood.childElementCount;
+
+const allFood = [1,2,3,4,5,6];
+const dinnerFood = [1,3];
+const lunchFood = [1,3,5];
+const breakfastFood = [1,5,6];
+const dessert = [2,3,5];
+
+getGallery(1);
+
+for(let i = 1; i <= 5; i++) {
+  const tabGallery = document.querySelector(`#gallery-tab > li:nth-child(${i})`);
+  tabGallery.addEventListener('click', function () {
+    getGallery(i);
+  });
+}
+
+function getGallery(index) {
+  const tabGallery1 = document.querySelector(`#gallery-tab > li:nth-child(${index})`);
+  tabGallery1.classList.remove('bg-secondary');
+  tabGallery1.classList.add('bg-primary');
+  if(lastSelectGallery > 0) {
+    const tabGallery2 = document.querySelector(`#gallery-tab > li:nth-child(${lastSelectGallery})`);
+    tabGallery2.classList.remove('bg-primary');
+    tabGallery2.classList.add('bg-secondary');
+  }
+  if(index == 1) {
+    showGallery(allFood);
+  } else if(index == 2) {
+    showGallery(dinnerFood);
+  } else if(index == 3) {
+    showGallery(lunchFood);
+  } else if(index == 4) {
+    showGallery(breakfastFood);
+  } else if(index == 5) {
+    showGallery(dessert);
+  }
+  lastSelectGallery = index;
+}
+
+async function showGallery(foods) {
+  for(let i = 1; i <= totalGallery; i++) {
+    const elGallery2 = document.querySelector(`#gallery-food > div:nth-child(${i})`);
+    elGallery2.classList.remove('scale-100');
+    elGallery2.classList.add('scale-0');
+    elGallery2.classList.add('hidden');
+  }
+  for(let i = 1; i <= totalGallery; i++) {
+    const elGallery = document.querySelector(`#gallery-food > div:nth-child(${i})`);
+    if (!(foods.indexOf(i) == -1)) {
+      elGallery.classList.remove('hidden');
+      await timer(300);
+      elGallery.classList.remove('scale-0');
+      elGallery.classList.add('scale-100');
+    }
+  }
+}
+
+// sliderGallery();
+
+async function sliderGallery() {
+  const gallerySlider = document.querySelector('#gallery-slider');
+  gallerySlider.classList.add('scale-100');
+  await timer(100);
+  gallerySlider.classList.remove('-rotate-12');
+  await timer(100);
+  gallerySlider.classList.add('rotate-12');
+  await timer(100);
+  gallerySlider.classList.remove('rotate-12');
+  await timer(100);
+  gallerySlider.classList.add('rotate-0');
+}

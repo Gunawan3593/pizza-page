@@ -51,6 +51,19 @@ module.exports = {
           '100%': {
             transform: 'translateY(0)'
           }
+        },
+        'wiggle': {
+          '0%': {
+            transform: 'rotate(-12deg)',
+          },
+          '50%': {
+            transform: 'rotate(12deg)',
+            'animation-timing-function': 'linear'
+          },
+          '100%': {
+            transform: 'rotate3d(0deg)',
+            'animation-timing-function': 'ease-out'
+          }
         }
       },
       animation: {
@@ -58,6 +71,7 @@ module.exports = {
         'fade-out-down': 'fade-out-down .9s ease-out forwards',
         'fade-in-up': 'fade-in-up .9s ease-out forwards',
         'fade-out-up': 'fade-out-up .9s ease-out forwards',
+        'wiggle': 'wiggle .9s ease forwards',
       }
     },
     container: {
