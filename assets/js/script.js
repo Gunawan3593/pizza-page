@@ -1,3 +1,20 @@
+// Navbar Fixed
+const header = document.querySelector('header');
+window.onscroll = function() {
+  const fixedNav = header.offsetTop;
+  const toTop = document.querySelector('#to-top');
+
+  if(window.pageYOffset > fixedNav) {
+    header.classList.add('navbar-fixed');
+    toTop.classList.remove('hidden');
+    toTop.classList.add('flex');
+  } else {
+    header.classList.remove('navbar-fixed');
+    toTop.classList.add('hidden');
+    toTop.classList.remove('flex');
+  }
+} 
+
 const slider = document.querySelector('#slider');
 const timer = ms => new Promise(res => setTimeout(res, ms));
 
@@ -307,8 +324,31 @@ for(let i = 1; i <= totalGallery; i++) {
   });
 }
 
+const prevGallery = document.querySelector('#prev-gallery');
+prevGallery.addEventListener('click', function() {
+  let prevIndex = 0;
+  if(galleryIndex == 1) {
+    prevIndex = 6;
+  } else {
+    prevIndex = galleryIndex - 1;
+  }
+  sliderGallery(prevIndex);
+});
+
+const nextGallery = document.querySelector('#next-gallery');
+nextGallery.addEventListener('click', function() {
+  let nextIndex = 0;
+  if(galleryIndex == 6) {
+    nextIndex = 1;
+  } else {
+    nextIndex = galleryIndex + 1;
+  }
+  sliderGallery(nextIndex);
+});
+
 const gallerySlider = document.querySelector('#gallery-slider');
 async function sliderGallery(index) {
+  header.classList.remove('navbar-fixed');
   if(galleryIndex > 0) {
     const galleryImage2 = document.querySelector(`#gallery-image > img:nth-child(${galleryIndex})`);
     galleryImage2.classList.add('hidden');
@@ -324,6 +364,9 @@ async function sliderGallery(index) {
   galleryContent.classList.add('-rotate-12');
   await timer(200);
   const galleryImage = document.querySelector(`#gallery-image > img:nth-child(${index})`);
+  galleryImage.addEventListener('click', function() {
+    nextGallery.click();
+  });
   galleryImage.classList.remove('hidden');
   galleryContent.classList.add('scale-100');
   const galleryCaption = document.querySelector(`#gallery-caption > span:nth-child(${index})`);
@@ -342,25 +385,5 @@ closeSlider.addEventListener('click', function() {
   gallerySlider.classList.add('hidden');
 });
 
-const prevGallery = document.querySelector('#prev-gallery');
-prevGallery.addEventListener('click', function() {
-  let prevIndex = 0;
-  if(galleryIndex == 1) {
-    prevIndex = 6;
-  } else {
-    prevIndex = galleryIndex - 1;
-  }
-  sliderGallery(prevIndex);
-});
 
-const nextGallery = document.querySelector('#next-gallery');
-
-nextGallery.addEventListener('click', function() {
-  let nextIndex = 0;
-  if(galleryIndex == 6) {
-    nextIndex = 1;
-  } else {
-    nextIndex = galleryIndex + 1;
-  }
-  sliderGallery(nextIndex);
-});
+new ActiveMenuLink("#nav-menu");

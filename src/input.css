@@ -6,6 +6,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.navbar-fixed {
+  @apply fixed z-[99] bg-white bg-opacity-70 backdrop-blur-sm;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2)
+}
+
 .hamburger-line {
   @apply w-[30px] h-[2px] my-2 block bg-dark;
 }
@@ -33,4 +38,8 @@ body {
 .arrow-down-shape::after {
   content: "";
   @apply absolute border-[3px] h-2 w-2 bg-slate-100 border-primary rotate-45 border-t-0 border-l-0 mt-[0.7rem] left-[50%] -translate-x-[50%]
+}
+
+.active {
+  @apply text-primary;
 }
