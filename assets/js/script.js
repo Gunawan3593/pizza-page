@@ -312,20 +312,28 @@ async function sliderGallery(index) {
   if(galleryIndex > 0) {
     const galleryImage2 = document.querySelector(`#gallery-image > img:nth-child(${galleryIndex})`);
     galleryImage2.classList.add('hidden');
+    const galleryCaption2 = document.querySelector(`#gallery-caption > span:nth-child(${galleryIndex})`);
+    galleryCaption2.classList.add('hidden');
   }
   const galleryContent = document.querySelector('#gallery-content');
   const currentSlide = document.querySelector('#current-slide');
   currentSlide.innerHTML = index;
   gallerySlider.classList.remove('hidden');
   galleryContent.classList.remove('scale-100');
+  galleryContent.classList.remove('rotate-0');
+  galleryContent.classList.add('-rotate-12');
   await timer(200);
   const galleryImage = document.querySelector(`#gallery-image > img:nth-child(${index})`);
   galleryImage.classList.remove('hidden');
   galleryContent.classList.add('scale-100');
+  const galleryCaption = document.querySelector(`#gallery-caption > span:nth-child(${index})`);
+  galleryCaption.classList.remove('hidden');
   await timer(450);
   galleryContent.classList.add('animate-wiggle');
   await timer(500);
   galleryContent.classList.remove('animate-wiggle');
+  galleryContent.classList.remove('-rotate-12');
+  galleryContent.classList.add('rotate-0');
   galleryIndex = index;
 }
 
